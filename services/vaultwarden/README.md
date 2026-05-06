@@ -59,6 +59,7 @@ chmod +x ~/vaultwarden/caddy
 
 **3. Docker Compose Setup (`docker-compose.yml`):**
 ```yaml
+version: '3'
 services:
   vaultwarden:
     image: vaultwarden/server:latest
