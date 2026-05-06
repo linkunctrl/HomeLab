@@ -21,9 +21,9 @@ Used the wrong volume path in the initial Docker run command. Mounting `/vw-data
 Switching the volume path to `~/vw-data/` places the directory in the home folder which the current user already owns.
 
 ```bash
-sudo mkdir -p /vw-data
-sudo chown -R 1000:1000 /vw-data
-sudo chmod 755 /vw-data
+sudo mkdir -p ~/vw-data
+sudo chown -R 1000:1000 ~/vw-data
+sudo chmod 755 ~/vw-data
  
 docker restart vaultwarden
 ```
