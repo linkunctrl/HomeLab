@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    environment:
+      WEBSOCKET_ENABLED: "true" 
+    volumes:
+      - ./vw-data:/data
+
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy:/usr/bin/caddy  # Change this if your custom build location is different 
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy-config:/config
+      - ./caddy-data:/data
+    environment:
+      DOMAIN: "https://vaultwarden.example.com"  # Change this
+      EMAIL: "admin@example.com"                 # Change this
+      DUCKDNS_TOKEN: "<token>"                   # That DuckDns token from earlier goes here
+      LOG_FILE: "/data/access.log"

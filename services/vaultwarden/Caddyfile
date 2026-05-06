@@ -1,0 +1,17 @@
+
+{$DOMAIN}:443 {
+  log {
+    level INFO
+    output file {$LOG_FILE} {
+      roll_size 10MB
+      roll_keep 10
+    }
+  }
+
+  tls {
+    dns duckdns {$DUCKDNS_TOKEN}
+  }
+  encode gzip
+  reverse_proxy /notifications/hub vaultwarden:3012
+  reverse_proxy vaultwarden:80
+}
