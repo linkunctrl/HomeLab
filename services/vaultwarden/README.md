@@ -164,3 +164,18 @@ docker compose up -d
 # Verify status
 sudo docker ps
 ```
+---
+### Problem 4: Caddy crashing
+**Cause:** 
+Caddy's data/config folders were created by root, so the non-root Caddy container (UID 1000) couldn't write its TLS certificates to them.
+
+**Fix:**
+```bash
+sudo chown -R 1000:1000 /path/to/caddy-config
+sudo chown -R 1000:1000 /path/to/caddy-data
+
+```
+Run the above commands on both folders to transfer ownership to UID 1000, matching the container's user and restoring write access. Then run
+```bash
+docker restart caddy
+``` 
