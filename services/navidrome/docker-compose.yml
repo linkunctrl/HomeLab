@@ -1,0 +1,25 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+
+    ports:
+      - "4533:4533"
+
+    volumes:
+      - ./data:/data
+      - /path/to/Music:/music:ro
+
+    environment:
+      ND_BASEURL: ""
+      ND_PORT: 4533
+      ND_LOGLEVEL: info
+
+    #networks:
+     # - caddy_network
+
+
+#networks:
+ # caddy_network:
+  #  external: true
