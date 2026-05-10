@@ -7,3 +7,4 @@ This is a living log of my virtual homelab. I will be dumping my config files an
 **Virtualisation Software: Docker**
 
 * [Vaultwarden](./services/vaultwarden/README.md)
+* [Navidrome](./services/navidrome/README.md)
