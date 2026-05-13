@@ -90,8 +90,91 @@ sudo pacman -S picard
 
 	sudo ufw allow 4533/tcp
 	```
+---
 
+### Scrobbling and Automation with Last.fm, Soundiiz
 
+#### Enable Scrobbling:
+- Connect Last.fm in the personal section of the Navidrome Web UI.
+
+- Use Soundiiz to connect your music services to Last.fm.
+
+#### Tailscale Funnel Configuration
+
+- In Tailscale, enable MagicDNS and HTTPS certificates.
+	
+- Add the following to your Access Control JSON to enable Funnel
+	```
+	"nodeAttrs": [
+    {
+        "target": ["autogroup:member"],
+        "attr": ["funnel"]
+    }
+	]	
+	```
+		
+Run the command to expose the Navidrome port:
+``` Bash
+
+tailscale funnel --bg 4533
+```
+Check the status:
+```Bash
+tailscale funnel status
+```
+
+This provides an HTTPS URL: https://devicename.yourgivensitename.ts.net.
+
+ #### [Lidarr might have trouble with Indexers]
+	Lidarr Setup on Arch-based Distros
+
+        Use the URL from the previous step to connect Navidrome to Soundiiz (this creates a metadata playlist for Lidarr).
+
+        Install and enable Lidarr:
+        Bash
+
+        yay -S lidarr-bin
+        sudo systemctl daemon-reload
+        sudo systemctl enable --now lidarr
+
+        Access the UI at http://localhost:8686.
+
+    Lidarr Configuration and Permissions
+
+        Import Playlists: Go to Settings > Import Playlists > Last.fm User.
+
+        Add your Last.fm username, select "Top Albums," and set the music root folder path.
+
+        If permission issues occur, edit the service:
+        Bash
+
+        sudo systemctl edit lidarr.service
+
+        Paste this between or above the comments:
+        Ini, TOML
+
+        [Service]
+        ProtectHome=false
+        ReadWritePaths=/path/to/Music
+
+    Indexers and Download Clients
+
+        Pick a torrent indexer in Settings > Indexers.
+
+        qBittorrent Setup:
+
+            In qBittorrent, go to Preferences > Web UI > Enable Web UI.
+
+            Set IP to 127.0.0.1 and port to 8080.
+
+            Set a password.
+
+            Use these details to enable the download client within Lidarr.
+
+    Remote Access for Others
+
+        Ensure Tailscale is running on the Navidrome server with Funnel access enabled. This allows friends and family to access the server from different networks easily. Don't forget to add them on your tailscale network.
+       
 
 
 
