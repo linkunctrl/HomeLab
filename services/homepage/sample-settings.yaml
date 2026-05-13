@@ -1,0 +1,18 @@
+title: TITLE
+layout:
+  Infrastructure:
+    style: row
+    columns: 2
+  Security & Tools:
+    style: row
+    columns: 3
+  Media:
+    style: row
+    columns: 1
+
+background:
+  image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+  blur: xl
+  saturate: 50
+  brightness: 25
+  opacity: 40

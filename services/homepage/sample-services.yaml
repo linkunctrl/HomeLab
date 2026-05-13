@@ -1,0 +1,13 @@
+- Infrastructure:
+    - Caddy:
+        icon: caddy
+        href: http://localhost
+        server: my-docker
+        container: caddy
+
+ Media:
+    - Navidrome:
+        icon: navidrome
+        href: http://tailscale-ip:4533
+        server: my-docker
+        container: navidrome
